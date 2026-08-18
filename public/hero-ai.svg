@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" role="img" aria-label="AI Marketing Automation">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#050d20"/>
+      <stop offset="55%" stop-color="#0a1a3d"/>
+      <stop offset="100%" stop-color="#101a3d"/>
+    </linearGradient>
+    <radialGradient id="glowBlue" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#2f6bff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#2f6bff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowPurple" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#7b48ff" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#7b48ff" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="nodeLine" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#5ea1ff" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#5ea1ff" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#b79dff" stop-opacity="0"/>
+    </linearGradient>
+    <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse">
+      <circle cx="1.4" cy="1.4" r="1.4" fill="#ffffff" opacity="0.06"/>
+    </pattern>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect width="1600" height="900" fill="url(#dots)"/>
+  <circle cx="1180" cy="260" r="420" fill="url(#glowBlue)"/>
+  <circle cx="1360" cy="620" r="380" fill="url(#glowPurple)"/>
+
+  <g stroke="url(#nodeLine)" stroke-width="1.5" fill="none" opacity="0.9">
+    <path d="M980 250 L1160 190 L1340 260"/>
+    <path d="M1160 190 L1160 400"/>
+    <path d="M1340 260 L1480 340"/>
+    <path d="M980 250 L900 430"/>
+    <path d="M1160 400 L1000 520 L1160 640"/>
+    <path d="M1160 400 L1360 470 L1480 620"/>
+    <path d="M1000 520 L900 430"/>
+    <path d="M1160 640 L1300 740"/>
+  </g>
+
+  <g fill="#eaf1ff">
+    <circle cx="980" cy="250" r="6"/>
+    <circle cx="1160" cy="190" r="7"/>
+    <circle cx="1340" cy="260" r="6"/>
+    <circle cx="1480" cy="340" r="5"/>
+    <circle cx="900" cy="430" r="6"/>
+    <circle cx="1160" cy="400" r="9" fill="#8fb6ff"/>
+    <circle cx="1000" cy="520" r="6"/>
+    <circle cx="1160" cy="640" r="7"/>
+    <circle cx="1360" cy="470" r="6"/>
+    <circle cx="1480" cy="620" r="5"/>
+    <circle cx="1300" cy="740" r="6"/>
+  </g>
+
+  <g opacity="0.9">
+    <rect x="1085" y="330" width="150" height="150" rx="26" fill="none" stroke="#8fb6ff" stroke-width="2" opacity="0.55"/>
+    <rect x="1085" y="330" width="150" height="150" rx="26" fill="none" stroke="#8fb6ff" stroke-width="2" opacity="0.25" transform="rotate(45 1160 405)"/>
+    <circle cx="1160" cy="405" r="34" fill="none" stroke="#bcd3ff" stroke-width="2"/>
+    <circle cx="1160" cy="405" r="10" fill="#cfe0ff"/>
+  </g>
+
+  <g opacity="0.5" stroke="#4f7cff" stroke-width="1">
+    <line x1="0" y1="120" x2="1600" y2="120" opacity="0.08"/>
+    <line x1="0" y1="780" x2="1600" y2="780" opacity="0.08"/>
+  </g>
+</svg>

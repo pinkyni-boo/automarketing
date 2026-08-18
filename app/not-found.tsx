@@ -1,0 +1,1 @@
+import Link from 'next/link';export default function NotFound(){return <main className="notfound"><div><span>404</span><h1>Không tìm thấy trang</h1><p>Trang bạn đang mở có thể đã được đổi đường dẫn.</p><Link className="btn btn-primary" href="/">Về trang chủ</Link></div></main>}

@@ -1,0 +1,2 @@
+'use client';import {NextStudio} from 'next-sanity/studio';import config from '@/sanity.config';
+export default function StudioPage(){const configured=Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID);if(!configured)return <main className="container" style={{padding:'70px 0'}}><div className="prose-card"><h1>CMS chưa kết nối</h1><p>Copy <code>.env.example</code> thành <code>.env.local</code>, điền <code>NEXT_PUBLIC_SANITY_PROJECT_ID</code> rồi restart <code>npm run dev</code>.</p></div></main>;return <NextStudio config={config}/>}

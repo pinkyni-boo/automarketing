@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="AI Marketing">
+  <defs>
+    <linearGradient id="bg1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#131b3f"/>
+      <stop offset="100%" stop-color="#2a1d5c"/>
+    </linearGradient>
+    <radialGradient id="glow1" cx="50%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#5a7bff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#5a7bff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots1" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#ffffff" opacity="0.08"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg1)"/>
+  <rect width="800" height="600" fill="url(#dots1)"/>
+  <circle cx="400" cy="250" r="260" fill="url(#glow1)"/>
+
+  <g stroke="#9fb6ff" stroke-width="1.5" opacity="0.55" fill="none">
+    <path d="M400 190 L310 260 L340 360 L460 360 L490 260 Z"/>
+    <path d="M400 190 L400 130"/>
+    <path d="M310 260 L230 240"/>
+    <path d="M490 260 L570 240"/>
+    <path d="M340 360 L300 430"/>
+    <path d="M460 360 L500 430"/>
+  </g>
+  <g fill="#cddcff">
+    <circle cx="400" cy="130" r="7"/>
+    <circle cx="230" cy="240" r="7"/>
+    <circle cx="570" cy="240" r="7"/>
+    <circle cx="300" cy="430" r="7"/>
+    <circle cx="500" cy="430" r="7"/>
+    <circle cx="400" cy="190" r="9" fill="#fff"/>
+    <circle cx="310" cy="260" r="8" fill="#fff"/>
+    <circle cx="490" cy="260" r="8" fill="#fff"/>
+    <circle cx="340" cy="360" r="8" fill="#fff"/>
+    <circle cx="460" cy="360" r="8" fill="#fff"/>
+  </g>
+</svg>

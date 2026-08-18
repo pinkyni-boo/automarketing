@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600" role="img" aria-label="Marketing Automation">
+  <defs>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0d2144"/>
+      <stop offset="100%" stop-color="#123a63"/>
+    </linearGradient>
+    <radialGradient id="glow2" cx="55%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="#38b6ff" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#38b6ff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots2" width="30" height="30" patternUnits="userSpaceOnUse">
+      <circle cx="1.2" cy="1.2" r="1.2" fill="#ffffff" opacity="0.08"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg2)"/>
+  <rect width="800" height="600" fill="url(#dots2)"/>
+  <circle cx="420" cy="260" r="260" fill="url(#glow2)"/>
+
+  <g fill="none" stroke="#bfe3ff" stroke-width="3" opacity="0.85">
+    <circle cx="330" cy="260" r="78"/>
+    <circle cx="330" cy="260" r="14" fill="#bfe3ff" stroke="none"/>
+    <path d="M330 182 L330 168 M330 352 L330 338 M252 260 L238 260 M408 260 L422 260" stroke-width="6" stroke-linecap="round"/>
+    <path d="M275 205 L265 195 M385 205 L395 195 M275 315 L265 325 M385 315 L395 325" stroke-width="6" stroke-linecap="round"/>
+  </g>
+  <g fill="none" stroke="#8fd0ff" stroke-width="3" opacity="0.6">
+    <circle cx="470" cy="360" r="46"/>
+    <circle cx="470" cy="360" r="9" fill="#8fd0ff" stroke="none"/>
+    <path d="M470 306 L470 296 M470 424 L470 414 M416 360 L406 360 M534 360 L524 360" stroke-width="4" stroke-linecap="round"/>
+  </g>
+  <path d="M408 260 C440 260 445 300 470 314" stroke="#eaf6ff" stroke-width="3" fill="none" opacity="0.7"/>
+</svg>

@@ -65,12 +65,18 @@ export default async function Post({ params }: { params: { slug: string } }) {
           <Image src={p.image} alt={p.title} fill sizes="(max-width:900px) 100vw, 900px" />
         </div>
         <article className="article-content">
-          {p.content?.map((x, i) => <p key={i}>{x}</p>)}
-          <h2>Gợi ý triển khai</h2>
-          <p>
-            Bắt đầu bằng một mục tiêu nhỏ, xác định chỉ số cần theo dõi và ghi nhận dữ liệu trước khi mở rộng.
-            Khi quy trình đã ổn định, mới tăng mức tự động hóa hoặc mở rộng sang nhiều kênh hơn.
-          </p>
+          {p.contentHtml ? (
+            <div dangerouslySetInnerHTML={{ __html: p.contentHtml }} />
+          ) : (
+            <>
+              {p.content?.map((x, i) => <p key={i}>{x}</p>)}
+              <h2>Gợi ý triển khai</h2>
+              <p>
+                Bắt đầu bằng một mục tiêu nhỏ, xác định chỉ số cần theo dõi và ghi nhận dữ liệu trước khi mở rộng.
+                Khi quy trình đã ổn định, mới tăng mức tự động hóa hoặc mở rộng sang nhiều kênh hơn.
+              </p>
+            </>
+          )}
         </article>
 
         {relatedFallback.length > 0 && (

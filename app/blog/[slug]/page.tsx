@@ -62,7 +62,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
           </div>
         </div>
         <div className="article-cover">
-          <Image src={p.image} alt={p.title} fill sizes="(max-width:900px) 100vw, 900px" />
+          <Image src={p.image} alt={p.title} fill unoptimized={/^https?:\/\//.test(p.image)} sizes="(max-width:900px) 100vw, 900px" />
         </div>
         <article className="article-content">
           {p.contentHtml ? (

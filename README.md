@@ -1,4 +1,4 @@
-# AutoMarketing PBN Pro - Next.js + Sanity
+# AutoMarketing PBN Pro - Next.js
 
 ## 1. Chạy local
 ```powershell
@@ -7,21 +7,7 @@ npm run dev
 ```
 Mở: http://localhost:3000
 
-## 2. Bật Sanity CMS
-1. Tạo project tại https://www.sanity.io/manage
-2. Copy `.env.example` -> `.env.local`
-3. Điền:
-```env
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-NEXT_PUBLIC_SANITY_PROJECT_ID=YOUR_PROJECT_ID
-NEXT_PUBLIC_SANITY_DATASET=production
-SANITY_API_VERSION=2024-08-01
-```
-4. Restart `npm run dev`
-5. Mở http://localhost:3000/studio
-6. Trong Sanity Manage -> API -> CORS origins, thêm `http://localhost:3000` và cho phép credentials.
-
-## 3. Khi deploy VPS
+## 2. Khi deploy VPS
 - Push source lên GitHub private.
 - Clone vào VPS.
 - Tạo `.env.local` production, đổi `NEXT_PUBLIC_SITE_URL=https://subdomain.automarketing.app`
@@ -29,11 +15,9 @@ SANITY_API_VERSION=2024-08-01
 - Chạy bằng `npm start` hoặc PM2.
 - Nginx reverse proxy về port 3000.
 - Bật HTTPS/SSL.
-- Thêm domain production vào Sanity CORS.
 
-## 4. Checklist Task 2
+## 3. Checklist Task 2
 - Home / Dịch vụ / Blog / Liên hệ / Giới thiệu
-- CMS tại `/studio`
 - `robots.txt`
 - `sitemap.xml`
 - metadata SEO
@@ -42,4 +26,4 @@ SANITY_API_VERSION=2024-08-01
 - 404
 
 ## Ghi chú
-Dữ liệu blog hiện dùng bài mẫu để website chạy ngay. Schema Sanity đã có sẵn để quản trị bài thật. Có thể nối query Sanity vào frontend khi team bắt đầu nhập content production.
+Dữ liệu blog hiện dùng bài mẫu trong `lib/posts.ts` để website chạy ngay. Nội dung blog được đăng qua công cụ ngoài dự án này.

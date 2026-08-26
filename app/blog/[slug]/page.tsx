@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
-import { PortableText } from '@portabletext/react';
 import PostCard from '@/components/PostCard';
 import { getAllPosts, getPostBySlug } from '@/lib/content';
 
@@ -26,23 +25,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     twitter: { card: 'summary_large_image', title, description, images: p.image ? [p.image] : undefined },
   };
 }
-
-const ptComponents = {
-  block: {
-    h2: ({ children }: any) => <h2>{children}</h2>,
-    h3: ({ children }: any) => <h3>{children}</h3>,
-    blockquote: ({ children }: any) => <blockquote>{children}</blockquote>,
-    normal: ({ children }: any) => <p>{children}</p>,
-  },
-  types: {
-    image: ({ value }: any) =>
-      value?.asset ? (
-        <span className="article-inline-image">
-          <Image src={value.asset.url || value.asset._ref} alt={value.alt || ''} width={760} height={460} />
-        </span>
-      ) : null,
-  },
-};
 
 export default async function Post({ params }: { params: { slug: string } }) {
   const p = await getPostBySlug(params.slug);
@@ -83,11 +65,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
           <Image src={p.image} alt={p.title} fill sizes="(max-width:900px) 100vw, 900px" />
         </div>
         <article className="article-content">
-          {p.body ? (
-            <PortableText value={p.body} components={ptComponents} />
-          ) : (
-            p.content?.map((x, i) => <p key={i}>{x}</p>)
-          )}
+          {p.content?.map((x, i) => <p key={i}>{x}</p>)}
           <h2>Gợi ý triển khai</h2>
           <p>
             Bắt đầu bằng một mục tiêu nhỏ, xác định chỉ số cần theo dõi và ghi nhận dữ liệu trước khi mở rộng.

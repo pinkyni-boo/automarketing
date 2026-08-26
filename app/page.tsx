@@ -1,5 +1,10 @@
 import Image from 'next/image';import Link from 'next/link';import { ArrowRight, Bot, ChartNoAxesCombined, FileText, Gauge, ShieldCheck, Sparkles, Target, Zap } from 'lucide-react';import PostCard from '@/components/PostCard';import Reveal from '@/components/Reveal';import { getAllPosts } from '@/lib/content';
 export const revalidate = 60;
+export const metadata = {
+  alternates: { canonical: '/' },
+  openGraph: { title: 'AutoMarketing | Marketing & AI Automation', description: 'Kiến thức Marketing, AI Automation, Content, SEO và tăng trưởng số.', url: '/', type: 'website' },
+  twitter: { card: 'summary_large_image', title: 'AutoMarketing | Marketing & AI Automation', description: 'Kiến thức Marketing, AI Automation, Content, SEO và tăng trưởng số.' },
+};
 export default async function Home(){const posts = await getAllPosts();return <main>
 <section className="hero"><Image src="/hero-ai.svg" alt="AI Marketing Automation" fill priority className="hero-bg"/><div className="hero-overlay"/><div className="container hero-content"><div className="eyebrow"><Sparkles size={15}/> AI & MARKETING AUTOMATION</div><h1>Tự động hóa Marketing.<br/><span>Tăng trưởng bền vững cùng AI.</span></h1><p>Kiến thức và giải pháp thực tiễn giúp doanh nghiệp tối ưu quy trình marketing, tiết kiệm chi phí và ra quyết định dựa trên dữ liệu.</p><div className="hero-actions"><Link className="btn btn-primary btn-lg" href="/dich-vu">Khám phá dịch vụ <ArrowRight size={18}/></Link><Link className="btn btn-glass btn-lg" href="/blog">Xem bài viết</Link></div></div></section>
 <section className="benefits"><div className="container benefits-grid">{[[Zap,'Tự động hóa bằng AI','Giảm việc thủ công và tăng tốc vận hành.'],[Target,'Tăng trưởng bền vững','Chiến lược dựa trên dữ liệu và mục tiêu rõ.'],[Gauge,'Tối ưu chi phí','Tập trung ngân sách vào kênh tạo hiệu quả.'],[ShieldCheck,'Dữ liệu minh bạch','Đo lường rõ ràng và báo cáo dễ theo dõi.']].map(([I,t,d]:any)=><div className="benefit" key={t}><span className="benefit-icon"><I/></span><div><b>{t}</b><p>{d}</p></div></div>)}</div></section>

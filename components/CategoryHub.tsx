@@ -25,7 +25,11 @@ export default async function CategoryHub({ accent, kicker, title, subtitle, cat
   return (
     <main className="page">
       <section className={`hub-hero ${accent}`}>
-        <div className="container">
+        {featured && (
+          <SafeImage src={featured.image} fallback={fallbackFor(featured.slug)} alt="" fill priority className="hub-hero-bg" />
+        )}
+        <div className="hub-hero-overlay" />
+        <div className="container hub-hero-content">
           <span className="kicker light">{kicker}</span>
           <h1>{title}</h1>
           <p>{subtitle}</p>

@@ -50,14 +50,17 @@ const STATS: [string, string][] = [
 const EXPERT_VOICES = [
   {
     ...AUTHORS.find((a) => a.name === 'Đức Anh')!,
+    accent: 'tech',
     quote: 'AI không thay thế con người, mà khuếch đại quyết định đúng — nếu chọn đúng bài toán để tự động hoá.',
   },
   {
     ...AUTHORS.find((a) => a.name === 'Thảo Ngân')!,
+    accent: 'mkt',
     quote: 'Nội dung tốt không cần phóng đại. Sự chân thật và cụ thể luôn thuyết phục hơn những mỹ từ chung chung.',
   },
   {
     ...AUTHORS.find((a) => a.name === 'Hải Yến')!,
+    accent: 'mkt',
     quote: 'Marketing giỏi không phải là chi nhiều tiền nhất, mà là đo lường tốt nhất đồng ngân sách nào tạo ra giá trị.',
   },
 ];
@@ -293,14 +296,16 @@ export default async function Home() {
             </div>
             <div className="testimonial-grid">
               {EXPERT_VOICES.map((t) => (
-                <div className="testimonial-card" key={t.name}>
-                  <Quote size={26} className="testimonial-quote-icon" />
+                <div className={`testimonial-card ${t.accent}`} key={t.name}>
+                  <span className="testimonial-quote-icon">
+                    <Quote size={18} />
+                  </span>
                   <p>{t.quote}</p>
                   <div className="testimonial-person">
                     <img src={t.avatar} alt={t.name} />
                     <div>
                       <b>{t.name}</b>
-                      <span>{t.role}</span>
+                      <span className="testimonial-role">{t.role}</span>
                     </div>
                   </div>
                 </div>

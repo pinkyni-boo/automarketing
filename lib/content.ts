@@ -11,6 +11,7 @@ export type UIPost = {
   readTime: string;
   image: string;
   author?: string;
+  authorRole?: string;
   content?: string[];
   contentHtml?: string;
   images?: string[];
@@ -29,8 +30,12 @@ function fromMock(p: MockPost): UIPost {
     excerpt: p.excerpt,
     category: p.category,
     date: p.date,
+    publishedAtISO: p.publishedAtISO,
     readTime: p.readTime,
     image: p.image,
+    author: p.author,
+    authorRole: p.authorRole,
+    tags: p.tags,
     content: p.content,
   };
 }
@@ -72,4 +77,38 @@ export async function getPostBySlug(slug: string): Promise<UIPost | null> {
   if (stored) return fromStored(stored);
   const local = getMockPost(slug);
   return local ? fromMock(local) : null;
+}
+
+export { CATEGORY_GROUPS, ALL_CATEGORIES, AUTHORS } from '@/lib/posts';
+
+export async function getCategoryCounts(): Promise<Record<string, number>> {
+  const posts = await getAllPosts();
+  return posts.reduce((acc, p) => {
+    acc[p.category] = (acc[p.category] || 0) + 1;
+    return acc;
+  }, {} as Record<string, number>);
+}
+
+export async function filterPosts(opts: { category?: string; q?: string } = {}): Promise<UIPost[]> {
+  const posts = await getAllPosts();
+  const q = opts.q?.trim().toLowerCase();
+  return posts.filter((p) => {
+    const matchCategory = !opts.category || p.category === opts.category;
+    const matchQuery =
+      !q ||
+      p.title.toLowerCase().includes(q) ||
+      p.excerpt.toLowerCase().includes(q) ||
+      (p.tags || []).some((t) => t.toLowerCase().includes(q));
+    return matchCategory && matchQuery;
+  });
+}
+
+export async function getAdjacentPosts(slug: string): Promise<{ prev: UIPost | null; next: UIPost | null }> {
+  const posts = await getAllPosts();
+  const idx = posts.findIndex((p) => p.slug === slug);
+  if (idx === -1) return { prev: null, next: null };
+  return {
+    prev: idx < posts.length - 1 ? posts[idx + 1] : null,
+    next: idx > 0 ? posts[idx - 1] : null,
+  };
 }

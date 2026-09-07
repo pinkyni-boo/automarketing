@@ -1,2 +1,35 @@
-import Link from 'next/link';import Image from 'next/image';import { ArrowRight, Clock } from 'lucide-react';
-export default function PostCard({post}:any){const external=/^https?:\/\//.test(post.image);return <article className="post-card"><Link href={`/blog/${post.slug}`} className="post-image"><Image src={post.image} alt={post.title} fill unoptimized={external} sizes="(max-width:768px) 100vw, 33vw"/><span className="category-pill">{post.category}</span></Link><div className="post-body"><div className="post-meta"><span>{post.date}</span><span><Clock size={14}/>{post.readTime}</span></div><h3><Link href={`/blog/${post.slug}`}>{post.title}</Link></h3><p>{post.excerpt}</p><Link className="read-more" href={`/blog/${post.slug}`}>Đọc thêm <ArrowRight size={16}/></Link></div></article>}
+import Link from 'next/link';
+import { ArrowRight, Clock } from 'lucide-react';
+import SafeImage from '@/components/SafeImage';
+import { fallbackFor } from '@/lib/fallback';
+import type { UIPost } from '@/lib/content';
+
+export default function PostCard({ post }: { post: UIPost }) {
+  return (
+    <article className="post-card">
+      <Link href={`/blog/${post.slug}`} className="post-image">
+        <SafeImage src={post.image} fallback={fallbackFor(post.slug)} alt={post.title} fill sizes="(max-width:768px) 100vw, 33vw" />
+        <span className="category-pill">{post.category}</span>
+      </Link>
+      <div className="post-body">
+        <div className="post-meta">
+          <span>{post.date}</span>
+          <span>
+            <Clock size={14} />
+            {post.readTime}
+          </span>
+        </div>
+        <h3>
+          <Link href={`/blog/${post.slug}`}>{post.title}</Link>
+        </h3>
+        <p>{post.excerpt}</p>
+        <div className="post-card-foot">
+          {post.author && <span className="post-author">{post.author}</span>}
+          <Link className="read-more" href={`/blog/${post.slug}`}>
+            Đọc thêm <ArrowRight size={16} />
+          </Link>
+        </div>
+      </div>
+    </article>
+  );
+}

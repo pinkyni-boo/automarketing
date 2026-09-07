@@ -191,7 +191,7 @@ export default async function Home() {
                     </Link>
                   ))}
                 </div>
-                <Link href={`/blog?category=${encodeURIComponent('Công nghệ')}`} className="text-link">
+                <Link href="/cong-nghe" className="text-link">
                   Xem tin công nghệ <ArrowRight size={16} />
                 </Link>
               </div>
@@ -214,7 +214,7 @@ export default async function Home() {
                     </Link>
                   ))}
                 </div>
-                <Link href="/blog?category=Marketing" className="text-link">
+                <Link href="/marketing" className="text-link">
                   Xem tin marketing <ArrowRight size={16} />
                 </Link>
               </div>

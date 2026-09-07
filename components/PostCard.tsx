@@ -1,7 +1,8 @@
 import Link from 'next/link';
-import { ArrowRight, Clock } from 'lucide-react';
+import { ArrowRight, Clock, Eye } from 'lucide-react';
 import SafeImage from '@/components/SafeImage';
 import { fallbackFor } from '@/lib/fallback';
+import { formatViews } from '@/lib/format';
 import type { UIPost } from '@/lib/content';
 
 export default function PostCard({ post }: { post: UIPost }) {
@@ -17,6 +18,10 @@ export default function PostCard({ post }: { post: UIPost }) {
           <span>
             <Clock size={14} />
             {post.readTime}
+          </span>
+          <span>
+            <Eye size={14} />
+            {formatViews(post.views)}
           </span>
         </div>
         <h3>

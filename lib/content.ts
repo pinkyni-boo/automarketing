@@ -1,5 +1,6 @@
 import { posts as mockPosts, getPost as getMockPost, type Post as MockPost } from '@/lib/posts';
 import { getStoredPosts, getStoredPost, type StoredPost } from '@/lib/postStore';
+import { pseudoViews } from '@/lib/format';
 
 export type UIPost = {
   slug: string;
@@ -19,6 +20,7 @@ export type UIPost = {
   tags?: string[];
   metaTitle?: string;
   metaDescription?: string;
+  views: number;
 };
 
 const FALLBACK_COVER = '/hero-ai.svg';
@@ -37,6 +39,7 @@ function fromMock(p: MockPost): UIPost {
     authorRole: p.authorRole,
     tags: p.tags,
     content: p.content,
+    views: pseudoViews(p.slug),
   };
 }
 
@@ -55,6 +58,7 @@ function fromStored(p: StoredPost): UIPost {
     images: p.images,
     videoUrl: p.videoUrl,
     tags: p.tags,
+    views: pseudoViews(p.slug),
   };
 }
 
@@ -69,7 +73,9 @@ function formatVietnameseDate(iso: string): string {
 export async function getAllPosts(): Promise<UIPost[]> {
   const stored = getStoredPosts().map(fromStored);
   const mock = mockPosts.map(fromMock).filter((p) => !stored.some((s) => s.slug === p.slug));
-  return [...stored, ...mock];
+  const merged = [...stored, ...mock];
+  // Luôn sắp theo ngày đăng mới nhất trước — mảng bài mock được khai báo theo nhóm danh mục, không theo ngày.
+  return merged.sort((a, b) => (b.publishedAtISO || '').localeCompare(a.publishedAtISO || ''));
 }
 
 export async function getPostBySlug(slug: string): Promise<UIPost | null> {
@@ -89,10 +95,10 @@ export async function getCategoryCounts(): Promise<Record<string, number>> {
   }, {} as Record<string, number>);
 }
 
-export async function filterPosts(opts: { category?: string; q?: string } = {}): Promise<UIPost[]> {
+export async function filterPosts(opts: { category?: string; q?: string; sort?: 'latest' | 'popular' } = {}): Promise<UIPost[]> {
   const posts = await getAllPosts();
   const q = opts.q?.trim().toLowerCase();
-  return posts.filter((p) => {
+  const filtered = posts.filter((p) => {
     const matchCategory = !opts.category || p.category === opts.category;
     const matchQuery =
       !q ||
@@ -101,6 +107,8 @@ export async function filterPosts(opts: { category?: string; q?: string } = {}):
       (p.tags || []).some((t) => t.toLowerCase().includes(q));
     return matchCategory && matchQuery;
   });
+  if (opts.sort === 'popular') return [...filtered].sort((a, b) => b.views - a.views);
+  return filtered;
 }
 
 export async function getAdjacentPosts(slug: string): Promise<{ prev: UIPost | null; next: UIPost | null }> {

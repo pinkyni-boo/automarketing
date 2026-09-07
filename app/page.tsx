@@ -42,7 +42,7 @@ const STATS: [string, string][] = [
   ['120.000+', 'Độc giả mỗi tháng'],
   ['500+', 'Bài viết đã xuất bản'],
   ['35+', 'Chuyên gia cộng tác'],
-  ['3 năm', 'Hoạt động liên tục'],
+  ['4 năm', 'Hoạt động liên tục'],
 ];
 
 // Góc nhìn từ chính đội ngũ biên tập — thay cho "khách hàng nói gì" kiểu landing page,

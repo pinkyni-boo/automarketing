@@ -513,10 +513,40 @@ export const posts: Post[] = [
 export const getPost = (slug: string) => posts.find((p) => p.slug === slug);
 
 export const AUTHORS = [
-  { name: 'Đức Anh', role: 'AI Researcher', avatar: 'https://i.pravatar.cc/150?img=12' },
-  { name: 'Minh Khang', role: 'Biên tập Công nghệ', avatar: 'https://i.pravatar.cc/150?img=13' },
-  { name: 'Thảo Ngân', role: 'Content Strategist', avatar: 'https://i.pravatar.cc/150?img=47' },
-  { name: 'Hải Yến', role: 'Performance Marketing Lead', avatar: 'https://i.pravatar.cc/150?img=32' },
-  { name: 'Quốc Bảo', role: 'Software Engineer', avatar: 'https://i.pravatar.cc/150?img=51' },
-  { name: 'Lan Phương', role: 'SEO Specialist', avatar: 'https://i.pravatar.cc/150?img=45' },
+  {
+    name: 'Đức Anh',
+    role: 'AI Researcher',
+    avatar: 'https://i.pravatar.cc/150?img=12',
+    bio: 'Nghiên cứu ứng dụng AI trong marketing và tự động hoá, từng tư vấn triển khai chatbot cho nhiều doanh nghiệp vừa và nhỏ.',
+  },
+  {
+    name: 'Minh Khang',
+    role: 'Biên tập Công nghệ',
+    avatar: 'https://i.pravatar.cc/150?img=13',
+    bio: 'Theo dõi mảng công nghệ doanh nghiệp và hạ tầng số, ưu tiên nội dung dễ hiểu, có ví dụ thực tế thay vì thuật ngữ.',
+  },
+  {
+    name: 'Thảo Ngân',
+    role: 'Content Strategist',
+    avatar: 'https://i.pravatar.cc/150?img=47',
+    bio: 'Xây dựng chiến lược nội dung cho nhiều thương hiệu, tập trung vào content pillar và kể chuyện thương hiệu.',
+  },
+  {
+    name: 'Hải Yến',
+    role: 'Performance Marketing Lead',
+    avatar: 'https://i.pravatar.cc/150?img=32',
+    bio: 'Quản lý ngân sách quảng cáo đa kênh, tối ưu chiến dịch theo dữ liệu và ROI thực tế.',
+  },
+  {
+    name: 'Quốc Bảo',
+    role: 'Software Engineer',
+    avatar: 'https://i.pravatar.cc/150?img=51',
+    bio: 'Phát triển web và công cụ nội bộ, quan tâm đến hiệu năng hệ thống và trải nghiệm người dùng.',
+  },
+  {
+    name: 'Lan Phương',
+    role: 'SEO Specialist',
+    avatar: 'https://i.pravatar.cc/150?img=45',
+    bio: 'Chuyên về technical SEO và tối ưu nội dung, giúp website tăng traffic tự nhiên bền vững.',
+  },
 ];

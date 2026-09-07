@@ -5,6 +5,7 @@ import PostCard from '@/components/PostCard';
 import BlogSidebar from '@/components/BlogSidebar';
 import PostNav from '@/components/PostNav';
 import ArticleBody from '@/components/ArticleBody';
+import AuthorBio from '@/components/AuthorBio';
 import SafeImage from '@/components/SafeImage';
 import { fallbackFor } from '@/lib/fallback';
 import { formatViews } from '@/lib/format';
@@ -78,6 +79,8 @@ export default async function Post({ params }: { params: { slug: string } }) {
           <article className="article-content">
             {p.contentHtml ? <div dangerouslySetInnerHTML={{ __html: p.contentHtml }} /> : <ArticleBody content={p.content || []} />}
           </article>
+
+          <AuthorBio author={p.author} />
 
           <PostNav prev={prev} next={next} />
 

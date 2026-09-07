@@ -1,12 +1,13 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Eye } from 'lucide-react';
 import PostCard from '@/components/PostCard';
 import BlogSidebar from '@/components/BlogSidebar';
 import PostNav from '@/components/PostNav';
 import ArticleBody from '@/components/ArticleBody';
 import SafeImage from '@/components/SafeImage';
 import { fallbackFor } from '@/lib/fallback';
+import { formatViews } from '@/lib/format';
 import { getAllPosts, getPostBySlug, getAdjacentPosts } from '@/lib/content';
 
 export const revalidate = 60;
@@ -65,6 +66,9 @@ export default async function Post({ params }: { params: { slug: string } }) {
             <div className="post-meta">
               <span>{p.date}</span>
               <span>{p.readTime}</span>
+              <span>
+                <Eye size={14} /> {formatViews(p.views)}
+              </span>
               {p.author && <span>{p.author}{p.authorRole ? ` · ${p.authorRole}` : ''}</span>}
             </div>
           </div>

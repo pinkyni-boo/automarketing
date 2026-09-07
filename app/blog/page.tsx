@@ -6,7 +6,7 @@ import { ALL_CATEGORIES } from '@/lib/posts';
 
 export const metadata = {
   title: 'Blog',
-  description: 'Tin tức công nghệ và kiến thức marketing thực tiễn, dễ áp dụng cho đội ngũ và doanh nghiệp.',
+  description: 'Tin tức công nghệ và kiến thức marketing thực tiễn, dễ áp dụng cho đội ngũ marketing và doanh nghiệp.',
   alternates: { canonical: '/blog' },
   openGraph: {
     title: 'Blog | MarTech',
@@ -23,10 +23,19 @@ export const metadata = {
 
 export const revalidate = 60;
 
-export default async function Blog({ searchParams }: { searchParams: { category?: string; q?: string } }) {
+export default async function Blog({ searchParams }: { searchParams: { category?: string; q?: string; sort?: string } }) {
   const category = searchParams?.category;
   const q = searchParams?.q;
-  const posts = await filterPosts({ category, q });
+  const sort = searchParams?.sort === 'popular' ? 'popular' : 'latest';
+  const posts = await filterPosts({ category, q, sort });
+
+  const base = new URLSearchParams();
+  if (category) base.set('category', category);
+  if (q) base.set('q', q);
+  const latestQS = base.toString();
+  const popularParams = new URLSearchParams(base);
+  popularParams.set('sort', 'popular');
+  const popularQS = popularParams.toString();
 
   return (
     <main className="page">
@@ -41,6 +50,17 @@ export default async function Blog({ searchParams }: { searchParams: { category?
       <section className="section">
         <div className="container blog-layout">
           <div className="blog-main">
+            <div className="blog-toolbar">
+              <div className="sort-tabs">
+                <Link href={`/blog${latestQS ? `?${latestQS}` : ''}`} className={sort === 'latest' ? 'active' : ''}>
+                  Mới nhất
+                </Link>
+                <Link href={`/blog?${popularQS}`} className={sort === 'popular' ? 'active' : ''}>
+                  Phổ biến
+                </Link>
+              </div>
+            </div>
+
             <div className="filter-pills">
               <Link href="/blog" className={!category ? 'pill active' : 'pill'}>
                 Tất cả

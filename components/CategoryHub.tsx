@@ -1,9 +1,10 @@
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Eye } from 'lucide-react';
 import PostCard from '@/components/PostCard';
 import BlogSidebar from '@/components/BlogSidebar';
 import SafeImage from '@/components/SafeImage';
 import { fallbackFor } from '@/lib/fallback';
+import { formatViews } from '@/lib/format';
 import { getAllPosts, getCategoryCounts } from '@/lib/content';
 
 export type HubConfig = {
@@ -57,6 +58,9 @@ export default async function CategoryHub({ accent, kicker, title, subtitle, cat
                 <div className="post-meta">
                   <span>{featured.date}</span>
                   <span>{featured.readTime}</span>
+                  <span>
+                    <Eye size={14} /> {formatViews(featured.views)}
+                  </span>
                   {featured.author && <span>{featured.author}</span>}
                 </div>
                 <Link className="btn btn-primary" href={`/blog/${featured.slug}`}>

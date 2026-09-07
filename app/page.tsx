@@ -1,8 +1,10 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Bot, ChartNoAxesCombined, Cpu, FileText, Quote, ShieldCheck, Sparkles, Target, Zap } from 'lucide-react';
+import { ArrowRight, Bot, ChartNoAxesCombined, Clock, Cpu, Eye, FileText, Quote, ShieldCheck, Sparkles, Target, Zap } from 'lucide-react';
 import PostCard from '@/components/PostCard';
 import Reveal from '@/components/Reveal';
+import SafeImage from '@/components/SafeImage';
+import { fallbackFor } from '@/lib/fallback';
+import { formatViews } from '@/lib/format';
 import { getAllPosts } from '@/lib/content';
 import { CATEGORY_GROUPS } from '@/lib/posts';
 
@@ -70,36 +72,57 @@ const TESTIMONIALS = [
 const BRANDS = ['NovaTech', 'BlueWave', 'Zentra', 'Growthly', 'Finlab', 'Orbit Digital'];
 
 export default async function Home() {
-  const posts = await getAllPosts();
+  const posts = await getAllPosts(); // đã sắp theo ngày mới nhất trước
   const [techGroup, mktGroup] = CATEGORY_GROUPS;
   const techPosts = posts.filter((p) => techGroup.categories.includes(p.category)).slice(0, 3);
   const mktPosts = posts.filter((p) => mktGroup.categories.includes(p.category)).slice(0, 3);
 
+  const [featured, ...others] = posts;
+  const heroSide = others.slice(0, 3);
+  const latestGrid = others.slice(3, 6);
+  const shownSlugs = new Set([featured.slug, ...heroSide.map((p) => p.slug), ...latestGrid.map((p) => p.slug)]);
+  const popular = [...posts].filter((p) => !shownSlugs.has(p.slug)).sort((a, b) => b.views - a.views).slice(0, 3);
+
   return (
     <main>
-      <section className="hero">
-        <Image src="/hero-ai.svg" alt="Công nghệ & Marketing" fill priority className="hero-bg" />
-        <div className="hero-overlay" />
-        <div className="container hero-content">
-          <div className="eyebrow">
-            <Sparkles size={15} /> CÔNG NGHỆ & MARKETING INSIGHTS
-          </div>
-          <h1>
-            Nơi Công nghệ
-            <br />
-            <span>gặp gỡ Marketing hiện đại.</span>
-          </h1>
-          <p>
-            MarTech tổng hợp tin tức công nghệ, ứng dụng AI và kiến thức marketing thực tiễn — giúp doanh nghiệp và
-            người làm nghề cập nhật nhanh, ra quyết định đúng.
-          </p>
-          <div className="hero-actions">
-            <Link className="btn btn-primary btn-lg" href="/dich-vu">
-              Khám phá dịch vụ <ArrowRight size={18} />
+      <h1 className="sr-only">MarTech — Công nghệ &amp; Marketing Insights</h1>
+
+      <section className="home-hero">
+        <div className="container">
+          <div className="home-hero-grid">
+            <Link href={`/blog/${featured.slug}`} className="home-hero-feature">
+              <SafeImage src={featured.image} fallback={fallbackFor(featured.slug)} alt={featured.title} fill priority sizes="(max-width:980px) 100vw, 62vw" />
+              <div className="home-hero-feature-overlay" />
+              <div className="home-hero-feature-body">
+                <span className="category-pill">{featured.category}</span>
+                <h2>{featured.title}</h2>
+                <p>{featured.excerpt}</p>
+                <div className="post-meta">
+                  <span>{featured.date}</span>
+                  <span>
+                    <Clock size={14} /> {featured.readTime}
+                  </span>
+                  <span>
+                    <Eye size={14} /> {formatViews(featured.views)}
+                  </span>
+                </div>
+              </div>
             </Link>
-            <Link className="btn btn-glass btn-lg" href="/blog">
-              Xem bài viết
-            </Link>
+
+            <div className="home-hero-side">
+              {heroSide.map((p) => (
+                <Link href={`/blog/${p.slug}`} key={p.slug} className="home-hero-side-item">
+                  <span className="home-hero-side-thumb">
+                    <SafeImage src={p.image} fallback={fallbackFor(p.slug)} alt={p.title} fill sizes="96px" />
+                  </span>
+                  <span className="home-hero-side-text">
+                    <span className="home-hero-side-cat">{p.category}</span>
+                    <b>{p.title}</b>
+                    <small>{p.date}</small>
+                  </span>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -134,7 +157,7 @@ export default async function Home() {
             </div>
             <div className="home-blog">
               <div className="post-grid">
-                {posts.slice(0, 3).map((p) => (
+                {latestGrid.map((p) => (
                   <PostCard key={p.slug} post={p} />
                 ))}
               </div>
@@ -150,7 +173,7 @@ export default async function Home() {
                 </div>
                 <div className="popular">
                   <h3>Bài đọc nhiều</h3>
-                  {posts.slice(3, 6).map((p, i) => (
+                  {popular.map((p, i) => (
                     <Link href={`/blog/${p.slug}`} key={p.slug}>
                       <span>0{i + 1}</span>
                       <b>{p.title}</b>

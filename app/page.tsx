@@ -6,7 +6,7 @@ import SafeImage from '@/components/SafeImage';
 import { fallbackFor } from '@/lib/fallback';
 import { formatViews } from '@/lib/format';
 import { getAllPosts } from '@/lib/content';
-import { CATEGORY_GROUPS } from '@/lib/posts';
+import { AUTHORS, CATEGORY_GROUPS } from '@/lib/posts';
 
 export const revalidate = 60;
 
@@ -45,27 +45,20 @@ const STATS: [string, string][] = [
   ['3 năm', 'Hoạt động liên tục'],
 ];
 
-const TESTIMONIALS = [
+// Góc nhìn từ chính đội ngũ biên tập — thay cho "khách hàng nói gì" kiểu landing page,
+// vì đây là trang tin/blog nên tín hiệu đáng tin cậy hơn là uy tín của người viết.
+const EXPERT_VOICES = [
   {
-    name: 'Nguyễn Hoàng Anh',
-    role: 'Giám đốc Marketing, NovaTech',
-    avatar: 'https://i.pravatar.cc/150?img=68',
-    quote:
-      'MarTech là nguồn tin mình đọc mỗi sáng — vừa cập nhật công nghệ, vừa có góc nhìn marketing thực chiến, dễ áp dụng ngay cho đội ngũ.',
+    ...AUTHORS.find((a) => a.name === 'Đức Anh')!,
+    quote: 'AI không thay thế con người, mà khuếch đại quyết định đúng — nếu chọn đúng bài toán để tự động hoá.',
   },
   {
-    name: 'Trần Bảo Trâm',
-    role: 'Founder, Zentra Studio',
-    avatar: 'https://i.pravatar.cc/150?img=44',
-    quote:
-      'Nội dung không sáo rỗng, có số liệu và ví dụ rõ ràng. Loạt bài về AI Automation giúp team mình tiết kiệm rất nhiều thời gian vận hành.',
+    ...AUTHORS.find((a) => a.name === 'Thảo Ngân')!,
+    quote: 'Nội dung tốt không cần phóng đại. Sự chân thật và cụ thể luôn thuyết phục hơn những mỹ từ chung chung.',
   },
   {
-    name: 'Lê Minh Quân',
-    role: 'CTO, Orbit Digital',
-    avatar: 'https://i.pravatar.cc/150?img=15',
-    quote:
-      'Là dân kỹ thuật nhưng mình vẫn theo dõi MarTech đều vì phần nội dung công nghệ được biên tập cẩn thận, không giật tít quá đà.',
+    ...AUTHORS.find((a) => a.name === 'Hải Yến')!,
+    quote: 'Marketing giỏi không phải là chi nhiều tiền nhất, mà là đo lường tốt nhất đồng ngân sách nào tạo ra giá trị.',
   },
 ];
 
@@ -294,12 +287,12 @@ export default async function Home() {
           <div className="container">
             <div className="section-head">
               <div>
-                <span className="kicker">TESTIMONIALS</span>
-                <h2>Độc giả & đối tác nói gì</h2>
+                <span className="kicker">ĐỘI NGŨ MARTECH</span>
+                <h2>Góc nhìn từ đội ngũ biên tập</h2>
               </div>
             </div>
             <div className="testimonial-grid">
-              {TESTIMONIALS.map((t) => (
+              {EXPERT_VOICES.map((t) => (
                 <div className="testimonial-card" key={t.name}>
                   <Quote size={26} className="testimonial-quote-icon" />
                   <p>{t.quote}</p>

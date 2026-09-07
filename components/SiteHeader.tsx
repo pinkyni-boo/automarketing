@@ -39,6 +39,12 @@ export default function SiteHeader() {
         </Link>
 
         <nav className={open ? 'nav-links open' : 'nav-links'} ref={navRef}>
+          <form action="/blog" method="get" className="mobile-search">
+            <input type="text" name="q" placeholder="Tìm bài viết..." />
+            <button type="submit" aria-label="Tìm kiếm">
+              <Search size={16} />
+            </button>
+          </form>
           <Link href="/" onClick={closeAll}>
             Trang chủ
           </Link>

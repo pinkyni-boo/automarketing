@@ -1,12 +1,31 @@
 'use client';
 import Link from 'next/link';
 import { Menu, X, Search, Sparkles, ChevronDown } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { CATEGORY_GROUPS } from '@/lib/posts';
 
 export default function SiteHeader() {
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [openGroup, setOpenGroup] = useState<string | null>(null);
+  const navRef = useRef<HTMLElement | null>(null);
+
+  const openNow = (group: string) => setOpenGroup(group);
+  const closeAll = () => {
+    setOpenGroup(null);
+    setOpen(false);
+  };
+
+  // Đóng dropdown khi bấm ra ngoài — không đóng theo mouseleave nữa vì khoảng
+  // cách nhỏ giữa nút và menu khiến chuột "rời hover" trước khi kịp bấm vào bên trong.
+  useEffect(() => {
+    if (!openGroup) return;
+    const onDocMouseDown = (e: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(e.target as Node)) setOpenGroup(null);
+    };
+    document.addEventListener('mousedown', onDocMouseDown);
+    return () => document.removeEventListener('mousedown', onDocMouseDown);
+  }, [openGroup]);
 
   return (
     <header className="site-header">
@@ -19,34 +38,42 @@ export default function SiteHeader() {
           </span>
         </Link>
 
-        <nav className={open ? 'nav-links open' : 'nav-links'}>
-          <Link href="/" onClick={() => setOpen(false)}>
+        <nav className={open ? 'nav-links open' : 'nav-links'} ref={navRef}>
+          <Link href="/" onClick={closeAll}>
             Trang chủ
           </Link>
           {CATEGORY_GROUPS.map((g) => (
-            <div className="nav-dropdown" key={g.group}>
-              <Link href={`/blog?category=${encodeURIComponent(g.categories[0])}`} onClick={() => setOpen(false)}>
+            <div className={openGroup === g.group ? 'nav-dropdown open' : 'nav-dropdown'} key={g.group} onMouseEnter={() => openNow(g.group)}>
+              <button
+                type="button"
+                className="nav-dropdown-trigger"
+                aria-expanded={openGroup === g.group}
+                onClick={() => openNow(g.group)}
+              >
                 {g.group} <ChevronDown size={13} />
-              </Link>
+              </button>
               <div className="nav-dropdown-menu">
+                <Link href={`/${g.slug}`} onClick={closeAll} className="nav-dropdown-all">
+                  Xem tất cả {g.group}
+                </Link>
                 {g.categories.map((c) => (
-                  <Link key={c} href={`/blog?category=${encodeURIComponent(c)}`} onClick={() => setOpen(false)}>
+                  <Link key={c} href={`/blog?category=${encodeURIComponent(c)}`} onClick={closeAll}>
                     {c}
                   </Link>
                 ))}
               </div>
             </div>
           ))}
-          <Link href="/dich-vu" onClick={() => setOpen(false)}>
+          <Link href="/dich-vu" onClick={closeAll}>
             Dịch vụ
           </Link>
-          <Link href="/blog" onClick={() => setOpen(false)}>
+          <Link href="/blog" onClick={closeAll}>
             Blog
           </Link>
-          <Link href="/gioi-thieu" onClick={() => setOpen(false)}>
+          <Link href="/gioi-thieu" onClick={closeAll}>
             Giới thiệu
           </Link>
-          <Link href="/lien-he" onClick={() => setOpen(false)}>
+          <Link href="/lien-he" onClick={closeAll}>
             Liên hệ
           </Link>
         </nav>

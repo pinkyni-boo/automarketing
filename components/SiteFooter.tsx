@@ -37,9 +37,9 @@ export default async function SiteFooter() {
               <Link href="/lien-he">Liên hệ</Link>
             </div>
             <div>
-              <Link href={`/blog?category=${encodeURIComponent('Công nghệ')}`}>Tin công nghệ</Link>
+              <Link href="/cong-nghe">Tin công nghệ</Link>
               <Link href={`/blog?category=${encodeURIComponent('Trí tuệ nhân tạo')}`}>Trí tuệ nhân tạo</Link>
-              <Link href="/blog?category=Marketing">Marketing</Link>
+              <Link href="/marketing">Marketing</Link>
               <Link href="/blog?category=SEO">SEO</Link>
             </div>
           </div>

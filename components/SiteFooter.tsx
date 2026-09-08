@@ -16,7 +16,10 @@ export default async function SiteFooter() {
         <div className="footer-col footer-about">
           <div className="brand footer-brand">
             <BrandMark />
-            <small>Công nghệ &amp; Marketing Insights</small>
+            <span>
+              <b>MarTech</b>
+              <small>Công nghệ &amp; Marketing Insights</small>
+            </span>
           </div>
           <p>
             MarTech được thành lập năm 2022, là chuyên trang tin về công nghệ và marketing, đồng hành cùng hàng nghìn

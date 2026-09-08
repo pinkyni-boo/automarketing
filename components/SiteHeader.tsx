@@ -52,7 +52,10 @@ export default function SiteHeader() {
       <div className="container nav">
         <Link className="brand" href="/">
           <BrandMark />
-          <small>Công nghệ &amp; Marketing Insights</small>
+          <span>
+            <b>MarTech</b>
+            <small>Công nghệ &amp; Marketing Insights</small>
+          </span>
         </Link>
 
         <nav className={open ? 'nav-links open' : 'nav-links'} ref={navRef}>

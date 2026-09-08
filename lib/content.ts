@@ -85,7 +85,7 @@ export async function getPostBySlug(slug: string): Promise<UIPost | null> {
   return local ? fromMock(local) : null;
 }
 
-export { CATEGORY_GROUPS, ALL_CATEGORIES, AUTHORS } from '@/lib/posts';
+export { CATEGORY_GROUPS, ALL_CATEGORIES, AUTHORS, getCategoryAccent } from '@/lib/posts';
 
 export async function getCategoryCounts(): Promise<Record<string, number>> {
   const posts = await getAllPosts();

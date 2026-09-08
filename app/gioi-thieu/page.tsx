@@ -1,4 +1,4 @@
-import { Cpu, Target, Users, Sparkles } from 'lucide-react';
+import { Cpu, FileText, ShieldCheck, Target, Users, Sparkles } from 'lucide-react';
 import { AUTHORS } from '@/lib/posts';
 
 export const metadata = {
@@ -47,18 +47,44 @@ export default function About() {
       </section>
 
       <section className="section">
-        <div className="container prose-card">
-          <h2>Định hướng nội dung</h2>
-          <p>
-            MarTech tập trung vào hai trụ cột nội dung: <b>Công nghệ</b> (AI, phần mềm, Internet, xu hướng số) và{' '}
-            <b>Marketing</b> (chiến lược, content, SEO, automation). Mục tiêu là trình bày nội dung dễ đọc, có ví dụ và
-            có thể áp dụng vào quy trình thực tế của doanh nghiệp.
-          </p>
-          <h2>Nguyên tắc biên tập</h2>
-          <p>
-            Ưu tiên nội dung có cấu trúc rõ ràng, giải thích ngắn gọn, tránh phóng đại và tách biệt quan điểm với dữ
-            liệu. Mỗi bài viết đều được biên tập bởi đội ngũ có chuyên môn trong lĩnh vực tương ứng.
-          </p>
+        <div className="container">
+          <div className="section-head">
+            <div>
+              <span className="kicker">CÁCH LÀM VIỆC</span>
+              <h2>Định hướng nội dung &amp; nguyên tắc biên tập</h2>
+            </div>
+          </div>
+          <div className="pillar-grid">
+            <div className="pillar-card">
+              <div className="pillar-head">
+                <span className="pillar-icon tech">
+                  <FileText size={20} />
+                </span>
+                <div>
+                  <h3>Định hướng nội dung</h3>
+                </div>
+              </div>
+              <p>
+                MarTech tập trung vào hai trụ cột nội dung: <b>Công nghệ</b> (AI, phần mềm, Internet, xu hướng số) và{' '}
+                <b>Marketing</b> (chiến lược, content, SEO, automation). Mục tiêu là trình bày nội dung dễ đọc, có ví
+                dụ và có thể áp dụng vào quy trình thực tế của doanh nghiệp.
+              </p>
+            </div>
+            <div className="pillar-card">
+              <div className="pillar-head">
+                <span className="pillar-icon mkt">
+                  <ShieldCheck size={20} />
+                </span>
+                <div>
+                  <h3>Nguyên tắc biên tập</h3>
+                </div>
+              </div>
+              <p>
+                Ưu tiên nội dung có cấu trúc rõ ràng, giải thích ngắn gọn, tránh phóng đại và tách biệt quan điểm với
+                dữ liệu. Mỗi bài viết đều được biên tập bởi đội ngũ có chuyên môn trong lĩnh vực tương ứng.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 

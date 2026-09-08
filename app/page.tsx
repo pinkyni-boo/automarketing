@@ -28,7 +28,7 @@ export const metadata = {
 const BENEFITS: [any, string, string][] = [
   [Zap, 'Cập nhật nhanh', 'Tin công nghệ và marketing mới nhất, biên tập mỗi ngày.'],
   [Target, 'Ứng dụng thực tế', 'Nội dung có ví dụ, số liệu và hướng triển khai cụ thể.'],
-  [Cpu, 'Song hành Công nghệ & AI', 'Không chỉ marketing — cả xu hướng công nghệ, phần mềm, AI.'],
+  [Cpu, 'Công nghệ & AI', 'Song hành cùng marketing — cả xu hướng công nghệ, phần mềm, AI.'],
   [ShieldCheck, 'Nguồn tin đáng tin cậy', 'Đội ngũ biên tập có chuyên môn, tách bạch dữ kiện và quan điểm.'],
 ];
 

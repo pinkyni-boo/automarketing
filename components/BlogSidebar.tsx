@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import { Search } from 'lucide-react';
+import { ArrowRight, Search } from 'lucide-react';
 import SafeImage from '@/components/SafeImage';
 import { fallbackFor } from '@/lib/fallback';
 import { getAllPosts, getCategoryCounts } from '@/lib/content';
+import { CATEGORY_GROUPS } from '@/lib/posts';
 
 export default async function BlogSidebar({
   excludeSlug,
@@ -16,12 +17,14 @@ export default async function BlogSidebar({
 
   return (
     <aside className="blog-sidebar">
+      {/* Thanh tìm kiếm — cùng khung thẻ (viền/bóng/bo góc) với các widget khác cho đồng bộ,
+          nhưng ô nhập gọn, icon lồng sẵn thay vì nút chữ to như trước. */}
       <div className="widget widget-search">
-        <h3>Tìm kiếm</h3>
-        <form action="/blog" method="get" className="search-form">
-          <input type="text" name="q" placeholder="Search Here..." />
-          <button className="btn btn-primary" type="submit">
-            <Search size={15} /> Tìm kiếm
+        <form action="/blog" method="get" className="sidebar-search">
+          <Search size={16} className="sidebar-search-icon" />
+          <input type="text" name="q" placeholder="Tìm bài viết..." aria-label="Tìm bài viết" />
+          <button type="submit" aria-label="Tìm kiếm">
+            <ArrowRight size={15} />
           </button>
         </form>
       </div>
@@ -45,16 +48,22 @@ export default async function BlogSidebar({
 
       <div className="widget widget-categories">
         <h3>Danh mục</h3>
-        <ul className="category-list">
-          {Object.entries(counts).map(([cat, count]) => (
-            <li key={cat}>
-              <Link href={`/blog?category=${encodeURIComponent(cat)}`} className={activeCategory === cat ? 'active' : ''}>
-                {cat}
-                <span>{count}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        {/* Tách riêng theo nhóm Công nghệ / Marketing thay vì liệt kê lẫn lộn một danh sách phẳng. */}
+        {CATEGORY_GROUPS.map((g) => (
+          <div className={`category-group ${g.accent}`} key={g.group}>
+            <span className="category-group-label">{g.group}</span>
+            <ul className="category-list">
+              {g.categories.map((cat) => (
+                <li key={cat}>
+                  <Link href={`/blog?category=${encodeURIComponent(cat)}`} className={activeCategory === cat ? 'active' : ''}>
+                    {cat}
+                    <span>{counts[cat] || 0}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
 
       <div className="widget widget-banner">

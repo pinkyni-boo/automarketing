@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import PostCard from '@/components/PostCard';
 import BlogSidebar from '@/components/BlogSidebar';
-import { filterPosts } from '@/lib/content';
-import { ALL_CATEGORIES } from '@/lib/posts';
+import { filterPosts, getCategoryAccent } from '@/lib/content';
+import { CATEGORY_GROUPS } from '@/lib/posts';
 
 export const metadata = {
   title: 'Blog',
@@ -21,13 +21,36 @@ export const metadata = {
   },
 };
 
-export const revalidate = 60;
+// Trang này lọc theo searchParams (category/q/sort) — không dùng revalidate ISR ở đây vì
+// kết hợp với searchParams từng khiến Next.js cache nhầm, bấm đổi danh mục nhưng nội dung
+// không đổi. Ép render động để mỗi lượt bấm luôn trả đúng nội dung theo query.
+export const dynamic = 'force-dynamic';
+
+const HERO_COPY: Record<'tech' | 'mkt' | 'all', { kicker: string; title: string; subtitle: string }> = {
+  all: {
+    kicker: 'BLOG',
+    title: 'Công nghệ & Marketing, cập nhật mỗi ngày',
+    subtitle: 'Tin tức công nghệ và kiến thức marketing thực tiễn, dễ áp dụng cho đội ngũ và doanh nghiệp.',
+  },
+  tech: {
+    kicker: 'CÔNG NGHỆ',
+    title: 'Tin tức Công nghệ',
+    subtitle: 'AI, phần mềm, Internet và xu hướng công nghệ ứng dụng cho doanh nghiệp — cập nhật dễ hiểu, có ví dụ thực tế.',
+  },
+  mkt: {
+    kicker: 'MARKETING',
+    title: 'Kiến thức Marketing',
+    subtitle: 'Chiến lược marketing, SEO, content và automation cho tăng trưởng bền vững.',
+  },
+};
 
 export default async function Blog({ searchParams }: { searchParams: { category?: string; q?: string; sort?: string } }) {
   const category = searchParams?.category;
   const q = searchParams?.q;
   const sort = searchParams?.sort === 'popular' ? 'popular' : 'latest';
   const posts = await filterPosts({ category, q, sort });
+  const accent = getCategoryAccent(category);
+  const hero = HERO_COPY[accent ?? 'all'];
 
   const base = new URLSearchParams();
   if (category) base.set('category', category);
@@ -39,11 +62,11 @@ export default async function Blog({ searchParams }: { searchParams: { category?
 
   return (
     <main className="page">
-      <section className="page-hero">
+      <section className={accent ? `page-hero ${accent}` : 'page-hero'}>
         <div className="container">
-          <span className="kicker">BLOG</span>
-          <h1>Công nghệ & Marketing, cập nhật mỗi ngày</h1>
-          <p>Tin tức công nghệ và kiến thức marketing thực tiễn, dễ áp dụng cho đội ngũ và doanh nghiệp.</p>
+          <span className="kicker">{hero.kicker}</span>
+          <h1>{hero.title}</h1>
+          <p>{hero.subtitle}</p>
         </div>
       </section>
 
@@ -61,14 +84,23 @@ export default async function Blog({ searchParams }: { searchParams: { category?
               </div>
             </div>
 
-            <div className="filter-pills">
-              <Link href="/blog" className={!category ? 'pill active' : 'pill'}>
+            {/* Nhóm bộ lọc theo Công nghệ / Marketing riêng biệt — tránh trộn lẫn hai
+                mảng nội dung khi người dùng vừa đến từ một trang chuyên mục cụ thể. */}
+            <div className="filter-groups">
+              <Link href="/blog" className={!category ? 'pill all active' : 'pill all'}>
                 Tất cả
               </Link>
-              {ALL_CATEGORIES.map((c) => (
-                <Link key={c} href={`/blog?category=${encodeURIComponent(c)}`} className={category === c ? 'pill active' : 'pill'}>
-                  {c}
-                </Link>
+              {CATEGORY_GROUPS.map((g) => (
+                <div className={`filter-group ${g.accent}`} key={g.group}>
+                  <span className="filter-group-label">{g.group}</span>
+                  <div className="filter-group-pills">
+                    {g.categories.map((c) => (
+                      <Link key={c} href={`/blog?category=${encodeURIComponent(c)}`} className={category === c ? 'pill active' : 'pill'}>
+                        {c}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
 

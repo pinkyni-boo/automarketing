@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { MapPin, Phone, Mail, PhoneCall } from 'lucide-react';
 import SafeImage from '@/components/SafeImage';
 import SocialIcons from '@/components/SocialIcons';
+import BrandMark from '@/components/BrandMark';
 import { fallbackFor } from '@/lib/fallback';
 import { getAllPosts } from '@/lib/content';
 
@@ -14,11 +15,8 @@ export default async function SiteFooter() {
       <div className="container footer-grid">
         <div className="footer-col footer-about">
           <div className="brand footer-brand">
-            <span className="brand-mark">M</span>
-            <span>
-              <b>MarTech</b>
-              <small>Công nghệ &amp; Marketing Insights</small>
-            </span>
+            <BrandMark />
+            <small>Công nghệ &amp; Marketing Insights</small>
           </div>
           <p>
             MarTech được thành lập năm 2022, là chuyên trang tin về công nghệ và marketing, đồng hành cùng hàng nghìn

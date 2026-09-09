@@ -29,7 +29,7 @@ export default async function SiteFooter() {
         </div>
 
         <div className="footer-col footer-links">
-          <h4>Liên kết</h4>
+          <h4 className="sr-only">Liên kết</h4>
           <div className="footer-links-grid">
             <div>
               <Link href="/">Trang chủ</Link>
@@ -47,7 +47,7 @@ export default async function SiteFooter() {
         </div>
 
         <div className="footer-col footer-recent">
-          <h4>Bài viết mới</h4>
+          <h4 className="sr-only">Bài viết mới</h4>
           {recent.map((p) => (
             <Link href={`/blog/${p.slug}`} key={p.slug} className="footer-recent-item">
               <span className="footer-recent-thumb">
@@ -62,7 +62,7 @@ export default async function SiteFooter() {
         </div>
 
         <div className="footer-col footer-contact">
-          <h4>Liên hệ</h4>
+          <h4 className="sr-only">Liên hệ</h4>
           <p>
             <MapPin size={15} /> 115 Phan Xích Long, Phường 2, Quận Phú Nhuận, TP. Hồ Chí Minh, Việt Nam
           </p>

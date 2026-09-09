@@ -30,7 +30,7 @@ export default async function BlogSidebar({
       </div>
 
       <div className="widget widget-recent">
-        <h3>Bài viết gần đây</h3>
+        <h3 className="sr-only">Bài viết gần đây</h3>
         <div className="recent-list">
           {recent.map((p) => (
             <Link href={`/blog/${p.slug}`} key={p.slug} className="recent-item">
@@ -47,7 +47,7 @@ export default async function BlogSidebar({
       </div>
 
       <div className="widget widget-categories">
-        <h3>Danh mục</h3>
+        <h3 className="sr-only">Danh mục</h3>
         {/* Tách riêng theo nhóm Công nghệ / Marketing thay vì liệt kê lẫn lộn một danh sách phẳng. */}
         {CATEGORY_GROUPS.map((g) => (
           <div className={`category-group ${g.accent}`} key={g.group}>

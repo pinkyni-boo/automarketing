@@ -140,7 +140,7 @@ export default async function Home() {
       </section>
 
       <Reveal>
-        <section className="section">
+        <section className="section section-latest">
           <div className="container">
             <div className="section-head">
               <div>
@@ -162,13 +162,13 @@ export default async function Home() {
                   <span className="mini-icon">
                     <Bot />
                   </span>
-                  <h3>Nhận bản tin MarTech</h3>
+                  <h3 className="sr-only">Nhận bản tin MarTech</h3>
                   <p>Tóm tắt xu hướng Công nghệ & Marketing mới nhất, gửi định kỳ vào hộp thư của bạn.</p>
                   <input placeholder="Email của bạn" />
                   <button className="btn btn-primary">Đăng ký ngay</button>
                 </div>
                 <div className="popular">
-                  <h3>Bài đọc nhiều</h3>
+                  <h3 className="sr-only">Bài đọc nhiều</h3>
                   {popular.map((p, i) => (
                     <Link href={`/blog/${p.slug}`} key={p.slug}>
                       <span>0{i + 1}</span>
@@ -183,7 +183,7 @@ export default async function Home() {
       </Reveal>
 
       <Reveal>
-        <section className="section soft">
+        <section className="section soft section-pillars">
           <div className="container">
             <div className="section-head">
               <div>
@@ -243,7 +243,7 @@ export default async function Home() {
       </Reveal>
 
       <Reveal>
-        <section className="section">
+        <section className="section section-services">
           <div className="container">
             <div className="section-head">
               <div>
@@ -286,7 +286,7 @@ export default async function Home() {
       </section>
 
       <Reveal>
-        <section className="section soft">
+        <section className="section soft section-team">
           <div className="container">
             <div className="section-head">
               <div>
